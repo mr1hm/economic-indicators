@@ -1,0 +1,47 @@
+{
+  "name": "economic-indicators",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:client": "webpack-dev-server",
+    "dev:server": "nodemon server/index",
+    "dev": "npm-run-all --parallel --silent dev:*",
+    "db:import": ". ./.env; psql $DATABASE_URL < database/dump.sql",
+    "db:export": ". ./.env; pg_dump -c -O $DATABASE_URL > database/dump.sql",
+    "start": "node server/index.js",
+    "build": "webpack --mode=production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mr1hm/economic-indicators.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mr1hm/economic-indicators/issues"
+  },
+  "homepage": "https://github.com/mr1hm/economic-indicators#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "pg": "^8.0.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "session-file-store": "^1.4.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-react-jsx": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "nodemon": "^2.0.3",
+    "npm-run-all": "^4.1.5",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
