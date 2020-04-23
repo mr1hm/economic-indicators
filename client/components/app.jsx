@@ -15,16 +15,58 @@ export default class App extends Component {
   }
 
   getIndicators() {
-    const fetchPopulation = fetch(`http://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD;SP.POP.TOTL?source=2&format=json&per_page=31680`) // Now properly retrieves all population data.
+    const fetchPopulation = fetch(`http://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD;SP.POP.TOTL?source=2&format=json&per_page=31680`) // Retrieves GDP and Population by Country.
     Promise.all([fetchPopulation])
       .then(res => Promise.all(res.map(response => response.json())))
       .then(results => {
         console.log(results)
+        // Combine years to 1 object.
+        const dataArray = results[0][1]
+        const combineYears = dataArray.reduce((acc, val, i) => {
+          let yearsObj = {}; // Create empty object literal to store population data in by year.
+          if (i > 15839) { // We don't want values from previous indexes, since those contain GDP values.
+            // Find first matching country ID.
+            const country = dataArray.find(element => element.country.id === val.country.id)
+            // Loop through remaining matching countries
+            country.populationByYear = { ...country.populationByYear, [val.date]: val.value }
+            // Set the year as property in yearsObj
+            // Set year property to population value
+            // Set property in first matching country called "years" and set it equal to yearsObj.
+            // Push into new acc array.
+            acc.push(country)
+            return acc;
+          } else {
+            // Same thing here, except we're doing it for GDP.
+            const country = dataArray.find(element => element.country.id === val.country.id)
+            country.gdpByYear = { ...country.gdpByYear, [val.date]: val.value }
+            acc.push(country)
+            return acc;
+          }
+        }, [])
+        console.log(combineYears) // Array comes out correctly. Now I Need find a way to remove the remaining matching countries.
+        // Run helper function here.
+        this.setState({ data: results })
       })
       .catch(err => console.error(err));
   };
 
+  reduceByCountry(data) {
+
+  }
+
   render() {
-    return <h1>HELLO</h1>
+    const { data } = this.state;
+    if (data.length === 0) {
+      return <div>LOADING...</div>
+    }
+    return (
+      <>
+        <Header />
+        <main className="container-fluid main-container">
+          Sam is gay.
+        </main>
+        <Footer />
+      </>
+    )
   }
 }
