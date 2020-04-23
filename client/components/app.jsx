@@ -15,8 +15,11 @@ export default class App extends Component {
   }
 
   getIndicators() {
-    const fetchPopulation = fetch(`http://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD;SP.POP.TOTL?source=2&format=json&per_page=31680`) // Retrieves GDP and Population by Country.
-    Promise.all([fetchPopulation])
+    const fetchPopulationAndGDP = fetch(`http://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD;SP.POP.TOTL?source=2&format=json&per_page=31680`) // Retrieves GDP and Population by Country.
+    const fetchLendingInterestRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/FR.INR.LEND?format=json&per_page=15850`)
+    const fetchInflationRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/SL.UEM.TOTL.ZS?format=json&per_page=15850`)
+    const fetchUnemploymentRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/FP.CPI.TOTL.ZG?format=json&per_page=15850`)
+    Promise.all([fetchPopulationAndGDP, fetchLendingInterestRate, fetchInflationRate, fetchUnemploymentRate])
       .then(res => Promise.all(res.map(response => response.json())))
       .then(results => {
         console.log(results)
@@ -44,6 +47,7 @@ export default class App extends Component {
           }
         }, [])
         console.log(combineYears) // Array comes out correctly. Now I Need find a way to remove the remaining matching countries.
+        // Need to loop through the combineYears array and remove values that match the first country's ID.
         // Run helper function here.
         this.setState({ data: results })
       })
@@ -63,7 +67,7 @@ export default class App extends Component {
       <>
         <Header />
         <main className="container-fluid main-container">
-          Sam is gay.
+          <h1>YOU ARE SO GAY SAM</h1>
         </main>
         <Footer />
       </>
