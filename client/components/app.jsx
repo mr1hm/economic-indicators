@@ -15,8 +15,11 @@ export default class App extends Component {
   }
 
   getIndicators() {
-    const fetchPopulation = fetch(`http://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD;SP.POP.TOTL?source=2&format=json&per_page=31680`) // Retrieves GDP and Population by Country.
-    Promise.all([fetchPopulation])
+    const fetchPopulationAndGDP = fetch(`http://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD;SP.POP.TOTL?source=2&format=json&per_page=31680`) // Retrieves GDP and Population by Country.
+    const fetchLendingInterestRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/FR.INR.LEND?format=json&per_page=15850`)
+    const fetchInflationRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/SL.UEM.TOTL.ZS?format=json&per_page=15850`)
+    const fetchUnemploymentRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/FP.CPI.TOTL.ZG?format=json&per_page=15850`)
+    Promise.all([fetchPopulationAndGDP, fetchLendingInterestRate, fetchInflationRate, fetchUnemploymentRate])
       .then(res => Promise.all(res.map(response => response.json())))
       .then(results => {
         console.log(results)
