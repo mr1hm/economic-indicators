@@ -47,6 +47,7 @@ export default class App extends Component {
           }
         }, [])
         console.log(combineYears) // Array comes out correctly. Now I Need find a way to remove the remaining matching countries.
+        // Need to loop through the combineYears array and remove values that match the first country's ID.
         // Run helper function here.
         this.setState({ data: results })
       })
@@ -66,7 +67,7 @@ export default class App extends Component {
       <>
         <Header />
         <main className="container-fluid main-container">
-          Sam is gay.
+          <h1>YOU ARE SO GAY SAM</h1>
         </main>
         <Footer />
       </>
