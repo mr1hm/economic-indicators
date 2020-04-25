@@ -60,10 +60,26 @@ export default class App extends Component {
           acc.push(country)
           return acc;
         }, [])
+        const reduceUnemploymentRateData = unemploymentRateData.reduce((acc, val, i) => {
+          const country = unemploymentRateData.find(element => element.country.id === val.country.id)
+          country.unemploymentRateByYear = { ...country.unemploymentRateByYear, [val.date]: val.value }
+          acc.push(country)
+          return acc;
+        }, [])
+        const reduceInflationRateData = inflationRateData.reduce((acc, val, i) => {
+          const country = inflationRateData.find(element => element.country.id === val.country.id)
+          country.inflationRateByYear = { ...country.inflationRateByYear, [val.date]: val.value }
+          acc.push(country)
+          return acc;
+        }, [])
         const GDPandPopulation = [...new Set(reduceGDPandPopulationData)]
         const interestRate = [...new Set(reduceInterestRateData)]
-        console.log(GDPandPopulation)
-        console.log(interestRate)
+        const unemploymentRate = [...new Set(reduceUnemploymentRateData)]
+        const inflationRate = [...new Set(reduceInflationRateData)]
+        console.log('GDP and Population:', GDPandPopulation)
+        console.log('Interest Rate:', interestRate)
+        console.log('Unemployment Rate:', unemploymentRate)
+        console.log('Inflation Rate:', inflationRate)
         this.setState({ data: { ...this.state.data, GDPandPopulation, interestRate } })
       })
       .catch(err => console.error(err));
