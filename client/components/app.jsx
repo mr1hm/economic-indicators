@@ -20,36 +20,53 @@ export default class App extends Component {
   }
 
   getIndicators() {
+    // Combine years to 1 object.
+    // Create empty object literal to store population data in by year.
+    // We don't want values from previous indexes, since those contain GDP values.
+    // Find first matching country ID.
+    // Loop through remaining matching countries
+    // Set the year as property in yearsObj
+    // Set year property to population value
+    // Set property in first matching country called "years" and set it equal to yearsObj.
+    // Push into new acc array.
     const fetchPopulationAndGDP = fetch(`http://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD;SP.POP.TOTL?source=2&format=json&per_page=31680`) // Retrieves GDP and Population by Country.
     const fetchLendingInterestRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/FR.INR.LEND?format=json&per_page=15850`)
     const fetchUnemploymentRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/SL.UEM.TOTL.ZS?format=json&per_page=15850`)
     const fetchInflationRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/FP.CPI.TOTL.ZG?format=json&per_page=15850`)
-    Promise.all([fetchPopulationAndGDP, fetchLendingInterestRate, fetchUnemploymentRate, fetchInflationRate])
+    const fetchGDPGrowthRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=15850`)
+    const fetchGDPAgricultureAndConstruction = fetch(`http://api.worldbank.org/v2/country/all/indicator/NV.AGR.TOTL.ZS;NV.IND.TOTL.ZS?source=2&format=json&per_page=31680`)
+    const fetchGDPManufacturingAndMining = fetch(`http://api.worldbank.org/v2/country/all/indicator/NV.IND.MANF.ZS?source=2&format=json&per_page=31680`) // Need to find API query param for Mining.
+    Promise.all([
+      fetchPopulationAndGDP,
+      fetchLendingInterestRate,
+      fetchUnemploymentRate,
+      fetchInflationRate,
+      fetchGDPGrowthRate,
+      fetchGDPAgricultureAndConstruction,
+      fetchGDPManufacturingAndMining])
       .then(res => Promise.all(res.map(response => response.json())))
       .then(results => {
         console.log(results)
-        // Combine years to 1 object.
-        const GDPandPopulationData = results[0][1]
+        // Instead of targeting these data sets separately, we can use a loop. Figure it out!
+        const totalGDPandPopulationData = results[0][1]
         const interestRateData = results[1][1]
         const unemploymentRateData = results[2][1]
         const inflationRateData = results[3][1]
-        let reduceGDPandPopulationData = GDPandPopulationData.reduce((acc, val, i) => {
-          let yearsObj = {}; // Create empty object literal to store population data in by year.
-          if (i > 15839) { // We don't want values from previous indexes, since those contain GDP values.
-            // Find first matching country ID.
-            const country = GDPandPopulationData.find(element => element.country.id === val.country.id)
-            // Loop through remaining matching countries
+        const GDPGrowthRateData = results[4][1] // GDP Growth Rate by year - percentage.
+        const GDPAgricultureAndConstructionData = results[5][1] // Percent of total GDP.
+        const GDPManufacturingAndMiningData = results[6][1] // Percent of total GDP.
+        console.log(GDPAgricultureAndConstructionData)
+        console.log(GDPManufacturingAndMiningData)
+        let reduceTotalGDPandPopulationData = totalGDPandPopulationData.reduce((acc, val, i) => {
+          let yearsObj = {};
+          if (i > 15839) {
+            const country = totalGDPandPopulationData.find(element => element.country.id === val.country.id)
             country.populationByYear = { ...country.populationByYear, [val.date]: val.value }
-            // Set the year as property in yearsObj
-            // Set year property to population value
-            // Set property in first matching country called "years" and set it equal to yearsObj.
-            // Push into new acc array.
             acc.push(country)
             return acc;
           } else {
-            // Same thing here, except we're doing it for GDP.
-            const country = GDPandPopulationData.find(element => element.country.id === val.country.id)
-            country.gdpByYear = { ...country.gdpByYear, [val.date]: val.value }
+            const country = totalGDPandPopulationData.find(element => element.country.id === val.country.id)
+            country.totalGDPByYear = { ...country.totalGDPByYear, [val.date]: val.value }
             acc.push(country)
             return acc;
           }
