@@ -72,8 +72,8 @@ export default class App extends Component {
   }
 
   render() {
-    const { data } = this.state;
-    if (data.length === 0) {
+    const { GDPandPopulation, UnemploymentRate, InflationRate } = this.state.data;
+    if (GDPandPopulation.length === 0) {
       return <div>LOADING...</div>
     }
     return (
