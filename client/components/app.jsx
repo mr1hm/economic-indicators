@@ -46,16 +46,23 @@ export default class App extends Component {
             return acc;
           } else {
             // Same thing here, except we're doing it for GDP.
-            const country = dataArray.find(element => element.country.id === val.country.id)
+            const country = GDPandPopulationData.find(element => element.country.id === val.country.id)
             country.gdpByYear = { ...country.gdpByYear, [val.date]: val.value }
             acc.push(country)
             return acc;
           }
         }, [])
-        console.log(combineYears) // Array comes out correctly. Now I Need find a way to remove the remaining matching countries.
-        // Need to loop through the combineYears array and remove values that match the first country's ID.
-        // Run helper function here.
-        this.setState({ data: results })
+        const reduceInterestRateData = interestRateData.reduce((acc, val, i) => {
+          const country = interestRateData.find(element => element.country.id === val.country.id)
+          country.interestRateByYear = { ...country.interestRateByYear, [val.date]: val.value }
+          acc.push(country)
+          return acc;
+        }, [])
+        const GDPandPopulation = [...new Set(reduceGDPandPopulationData)]
+        const interestRate = [...new Set(reduceInterestRateData)]
+        console.log(GDPandPopulation)
+        console.log(interestRate)
+        this.setState({ data: { ...this.state.data, GDPandPopulation, interestRate } })
       })
       .catch(err => console.error(err));
   };
