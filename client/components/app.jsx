@@ -89,14 +89,22 @@ export default class App extends Component {
           acc.push(country)
           return acc;
         }, [])
-        const GDPandPopulation = [...new Set(reduceGDPandPopulationData)]
+        const reduceGDPGrowthRateData = GDPGrowthRateData.reduce((acc, val, i) => {
+          const country = GDPGrowthRateData.find(element => element.country.id === val.country.id)
+          country.GDPGrowthRateByYear = { ...country.GDPGrowthRateByYear, [val.date]: val.value }
+          acc.push(country)
+          return acc;
+        }, [])
+        const GDPandPopulation = [...new Set(reduceTotalGDPandPopulationData)]
         const interestRate = [...new Set(reduceInterestRateData)]
         const unemploymentRate = [...new Set(reduceUnemploymentRateData)]
         const inflationRate = [...new Set(reduceInflationRateData)]
+        const GDPGrowthRate = [...new Set(reduceGDPGrowthRateData)]
         console.log('GDP and Population:', GDPandPopulation)
         console.log('Interest Rate:', interestRate)
         console.log('Unemployment Rate:', unemploymentRate)
         console.log('Inflation Rate:', inflationRate)
+        console.log('GDP Growth Rate:', GDPGrowthRate)
         this.setState({ data: { ...this.state.data, GDPandPopulation, interestRate } })
       })
       .catch(err => console.error(err));
