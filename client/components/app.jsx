@@ -24,13 +24,15 @@ export default class App extends Component {
     const fetchLendingInterestRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/FR.INR.LEND?format=json&per_page=15850`)
     const fetchUnemploymentRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/SL.UEM.TOTL.ZS?format=json&per_page=15850`)
     const fetchInflationRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/FP.CPI.TOTL.ZG?format=json&per_page=15850`)
-    Promise.all([fetchPopulationAndGDP, fetchLendingInterestRate, fetchInflationRate, fetchUnemploymentRate])
+    Promise.all([fetchPopulationAndGDP, fetchLendingInterestRate, fetchUnemploymentRate, fetchInflationRate])
       .then(res => Promise.all(res.map(response => response.json())))
       .then(results => {
         console.log(results)
         // Combine years to 1 object.
         const GDPandPopulationData = results[0][1]
         const interestRateData = results[1][1]
+        const unemploymentRateData = results[2][1]
+        const inflationRateData = results[3][1]
         let reduceGDPandPopulationData = GDPandPopulationData.reduce((acc, val, i) => {
           let yearsObj = {}; // Create empty object literal to store population data in by year.
           if (i > 15839) { // We don't want values from previous indexes, since those contain GDP values.
@@ -58,10 +60,26 @@ export default class App extends Component {
           acc.push(country)
           return acc;
         }, [])
+        const reduceUnemploymentRateData = unemploymentRateData.reduce((acc, val, i) => {
+          const country = unemploymentRateData.find(element => element.country.id === val.country.id)
+          country.unemploymentRateByYear = { ...country.unemploymentRateByYear, [val.date]: val.value }
+          acc.push(country)
+          return acc;
+        }, [])
+        const reduceInflationRateData = inflationRateData.reduce((acc, val, i) => {
+          const country = inflationRateData.find(element => element.country.id === val.country.id)
+          country.inflationRateByYear = { ...country.inflationRateByYear, [val.date]: val.value }
+          acc.push(country)
+          return acc;
+        }, [])
         const GDPandPopulation = [...new Set(reduceGDPandPopulationData)]
         const interestRate = [...new Set(reduceInterestRateData)]
-        console.log(GDPandPopulation)
-        console.log(interestRate)
+        const unemploymentRate = [...new Set(reduceUnemploymentRateData)]
+        const inflationRate = [...new Set(reduceInflationRateData)]
+        console.log('GDP and Population:', GDPandPopulation)
+        console.log('Interest Rate:', interestRate)
+        console.log('Unemployment Rate:', unemploymentRate)
+        console.log('Inflation Rate:', inflationRate)
         this.setState({ data: { ...this.state.data, GDPandPopulation, interestRate } })
       })
       .catch(err => console.error(err));
