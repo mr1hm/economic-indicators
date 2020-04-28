@@ -11,6 +11,9 @@ export default class App extends Component {
         interestRate: [],
         unemploymentRate: [],
         inflationRate: [],
+        GDPagricultureAndConstruction: [],
+        GDPmanufacturing: [],
+        GDPservices: [],
       }
     }
   }
