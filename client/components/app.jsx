@@ -39,7 +39,7 @@ export default class App extends Component {
     const fetchGDPGrowthRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=15850`)
     const fetchGDPAgricultureAndConstruction = fetch(`http://api.worldbank.org/v2/country/all/indicator/NV.AGR.TOTL.ZS;NV.IND.TOTL.ZS?source=2&format=json&per_page=31680`)
     const fetchGDPManufacturingAndMining = fetch(`http://api.worldbank.org/v2/country/all/indicator/NV.IND.MANF.ZS?source=2&format=json&per_page=31680`) // Need to find API query param for Mining.
-    const fetchGDPServices = fetch(`http://api.worldbank.org/v2/country/all/indicator/NV.SRV.TOTL.ZS;?format=json&per_page=31680`)
+    const fetchGDPServices = fetch(`http://api.worldbank.org/v2/country/all/indicator/NV.SRV.TOTL.ZS?format=json&per_page=31680`)
     Promise.all([
       fetchPopulationAndGDP,
       fetchLendingInterestRate,
@@ -102,16 +102,40 @@ export default class App extends Component {
           acc.push(country)
           return acc;
         }, [])
+        const reduceAgrilcultureAndConstructionData = GDPAgricultureAndConstructionData.reduce((acc, val, i) => {
+          const country = GDPAgricultureAndConstructionData.find(element => element.country.id === val.country.id)
+          country.percentGDPfromAgricultureAndConstruction = { ...country.percentGDPfromAgricultureAndConstruction, [val.date]: val.value }
+          acc.push(country)
+          return acc;
+        }, [])
+        const reduceGDPManufacturingAndMiningData = GDPManufacturingAndMiningData.reduce((acc, val, i) => {
+          const country = GDPManufacturingAndMiningData.find(element => element.country.id === val.country.id)
+          country.percentGDPfromManufacturingAndMining = { ...country.percentGDPfromManufacturingAndMining, [val.date]: val.value }
+          acc.push(country)
+          return acc;
+        }, [])
+        const reduceGDPServicesData = GDPServicesData.reduce((acc, val, i) => {
+          const country = GDPServicesData.find(element => element.country.id === val.country.id)
+          country.percentGDPfromServices = { ...country.percentGDPfromServices, [val.date]: val.value }
+          acc.push(country)
+          return acc;
+        }, [])
         const GDPandPopulation = [...new Set(reduceTotalGDPandPopulationData)]
         const interestRate = [...new Set(reduceInterestRateData)]
         const unemploymentRate = [...new Set(reduceUnemploymentRateData)]
         const inflationRate = [...new Set(reduceInflationRateData)]
         const GDPGrowthRate = [...new Set(reduceGDPGrowthRateData)]
+        const GDPAgricultureAndConstruction = [...new Set(reduceAgrilcultureAndConstructionData)]
+        const GDPManufacturingAndMining = [...new Set(reduceGDPManufacturingAndMiningData)]
+        const GDPServices = [...new Set(reduceGDPServicesData)]
         console.log('GDP and Population:', GDPandPopulation)
         console.log('Interest Rate:', interestRate)
         console.log('Unemployment Rate:', unemploymentRate)
         console.log('Inflation Rate:', inflationRate)
         console.log('GDP Growth Rate:', GDPGrowthRate)
+        console.log('GDP from Agriculture and Construction:', GDPAgricultureAndConstruction)
+        console.log('GDP from Manufacturing and Mining:', GDPManufacturingAndMining)
+        console.log('GDP from Services:', GDPServices)
         this.setState({ data: { ...this.state.data, GDPandPopulation, interestRate } })
       })
       .catch(err => console.error(err));
