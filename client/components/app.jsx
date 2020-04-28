@@ -11,6 +11,9 @@ export default class App extends Component {
         interestRate: [],
         unemploymentRate: [],
         inflationRate: [],
+        GDPagricultureAndConstruction: [],
+        GDPmanufacturing: [],
+        GDPservices: [],
       }
     }
   }
@@ -36,6 +39,7 @@ export default class App extends Component {
     const fetchGDPGrowthRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.KD.ZG?format=json&per_page=15850`)
     const fetchGDPAgricultureAndConstruction = fetch(`http://api.worldbank.org/v2/country/all/indicator/NV.AGR.TOTL.ZS;NV.IND.TOTL.ZS?source=2&format=json&per_page=31680`)
     const fetchGDPManufacturingAndMining = fetch(`http://api.worldbank.org/v2/country/all/indicator/NV.IND.MANF.ZS?source=2&format=json&per_page=31680`) // Need to find API query param for Mining.
+    const fetchGDPServices = fetch(`http://api.worldbank.org/v2/country/all/indicator/NV.SRV.TOTL.ZS;?format=json&per_page=31680`)
     Promise.all([
       fetchPopulationAndGDP,
       fetchLendingInterestRate,
@@ -43,7 +47,8 @@ export default class App extends Component {
       fetchInflationRate,
       fetchGDPGrowthRate,
       fetchGDPAgricultureAndConstruction,
-      fetchGDPManufacturingAndMining])
+      fetchGDPManufacturingAndMining,
+      fetchGDPServices])
       .then(res => Promise.all(res.map(response => response.json())))
       .then(results => {
         console.log(results)
@@ -55,8 +60,10 @@ export default class App extends Component {
         const GDPGrowthRateData = results[4][1] // GDP Growth Rate by year - percentage.
         const GDPAgricultureAndConstructionData = results[5][1] // Percent of total GDP.
         const GDPManufacturingAndMiningData = results[6][1] // Percent of total GDP.
+        const GDPServicesData = results[7][1]
         console.log(GDPAgricultureAndConstructionData)
         console.log(GDPManufacturingAndMiningData)
+        console.log(GDPServicesData)
         let reduceTotalGDPandPopulationData = totalGDPandPopulationData.reduce((acc, val, i) => {
           let yearsObj = {};
           if (i > 15839) {
