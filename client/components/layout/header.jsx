@@ -11,8 +11,8 @@ export default class Header extends Component {
   render() {
     return (
       <main className="header-container container-fluid">
-        <section className="row justify-content-center">
-          <div className="col">
+        <section className="row">
+          <div className="col d-flex justify-content-center">
             <h1>Economic Indicators</h1>
           </div>
         </section>
