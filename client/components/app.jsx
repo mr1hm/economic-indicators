@@ -154,7 +154,11 @@ export default class App extends Component {
       <>
         <Header />
         <main className="container-fluid main-container">
-          <h1>YOU ARE SO GAY SAM</h1>
+          <section className="row">
+            <div className="col">
+
+            </div>
+          </section>
         </main>
         <Footer />
       </>
