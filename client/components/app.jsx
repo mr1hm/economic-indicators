@@ -24,6 +24,12 @@ export default class App extends Component {
     this.getIndicators();
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.data !== this.state.data) {
+      this.setState({ loading: false })
+    }
+  }
+
   getIndicators() {
     // Combine years to 1 object.
     // Create empty object literal to store population data in by year.
