@@ -9,11 +9,12 @@ export default class Loading extends Component {
   }
 
   render() {
+    const { loading } = this.props;
     return (
       <main className="loading-container container">
         <section className="row loading-spinner justify-content-center align-items-center">
           <div id="spinner" className="col d-flex justify-content-center">
-            Pulling Data...
+            Pulling Data
           </div>
         </section>
       </main>
