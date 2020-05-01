@@ -146,15 +146,11 @@ export default class App extends Component {
       .catch(err => console.error(err));
   };
 
-  reduceByCountry(data) {
-
-  }
-
   render() {
     const { GDPandPopulation, UnemploymentRate, InflationRate } = this.state.data;
-    if (GDPandPopulation.length === 0) {
+    if (this.state.loading) {
       return (
-        <Loading />
+        <Loading loading={this.state.loading} />
       );
     }
     return (
