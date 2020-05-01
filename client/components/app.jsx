@@ -69,9 +69,6 @@ export default class App extends Component {
         const GDPAgricultureAndConstructionData = results[5][1] // Percent of total GDP.
         const GDPManufacturingAndMiningData = results[6][1] // Percent of total GDP.
         const GDPServicesData = results[7][1]
-        console.log(GDPAgricultureAndConstructionData)
-        console.log(GDPManufacturingAndMiningData)
-        console.log(GDPServicesData)
         let reduceTotalGDPandPopulationData = totalGDPandPopulationData.reduce((acc, val, i) => {
           let yearsObj = {};
           if (i > 15839) {
