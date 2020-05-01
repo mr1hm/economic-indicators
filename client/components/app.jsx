@@ -7,6 +7,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      loading: true,
       data: {
         GDPandPopulation: [],
         interestRate: [],
@@ -21,6 +22,12 @@ export default class App extends Component {
 
   componentDidMount() {
     this.getIndicators();
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.data !== this.state.data) {
+      this.setState({ loading: false })
+    }
   }
 
   getIndicators() {
@@ -62,9 +69,6 @@ export default class App extends Component {
         const GDPAgricultureAndConstructionData = results[5][1] // Percent of total GDP.
         const GDPManufacturingAndMiningData = results[6][1] // Percent of total GDP.
         const GDPServicesData = results[7][1]
-        console.log(GDPAgricultureAndConstructionData)
-        console.log(GDPManufacturingAndMiningData)
-        console.log(GDPServicesData)
         let reduceTotalGDPandPopulationData = totalGDPandPopulationData.reduce((acc, val, i) => {
           let yearsObj = {};
           if (i > 15839) {
@@ -142,15 +146,11 @@ export default class App extends Component {
       .catch(err => console.error(err));
   };
 
-  reduceByCountry(data) {
-
-  }
-
   render() {
     const { GDPandPopulation, UnemploymentRate, InflationRate } = this.state.data;
-    if (GDPandPopulation.length === 0) {
+    if (this.state.loading) {
       return (
-        <Loading />
+        <Loading loading={this.state.loading} />
       );
     }
     return (
