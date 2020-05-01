@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Header from './layout/header';
 import Footer from './layout/footer';
+import Loading from './layout/loading';
 
 export default class App extends Component {
   constructor(props) {
@@ -148,7 +149,9 @@ export default class App extends Component {
   render() {
     const { GDPandPopulation, UnemploymentRate, InflationRate } = this.state.data;
     if (GDPandPopulation.length === 0) {
-      return <div>LOADING...</div>
+      return (
+        <Loading />
+      );
     }
     return (
       <>
