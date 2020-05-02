@@ -12,8 +12,8 @@ export default class Header extends Component {
     return (
       <main className="header-container container-fluid">
         <section className="row">
-          <div className="col d-flex justify-content-center">
-            <h1>Economic Indicators</h1>
+          <div className="col d-flex">
+            <h1 className="header-title">Economic Indicators</h1>
           </div>
         </section>
       </main>
