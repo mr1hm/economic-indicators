@@ -48,3 +48,8 @@ body {
   letter-spacing: 1px;
   font-size: 14px;
 }
+
+.header-title {
+  border: 1px solid black;
+  padding: 5px;
+}
