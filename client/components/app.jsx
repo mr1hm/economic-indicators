@@ -160,7 +160,7 @@ export default class App extends Component {
         <main className="container-fluid main-container">
           <section className="row">
             <div className="col">
-
+              <Graphs GDPandPopulation={GDPandPopulation} />
             </div>
           </section>
         </main>
