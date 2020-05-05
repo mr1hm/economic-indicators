@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from './layout/header';
 import Footer from './layout/footer';
 import Loading from './layout/loading';
+import Graphs from './graphs';
 
 export default class App extends Component {
   constructor(props) {
@@ -159,7 +160,7 @@ export default class App extends Component {
         <main className="container-fluid main-container">
           <section className="row">
             <div className="col">
-
+              <Graphs GDPandPopulation={GDPandPopulation} />
             </div>
           </section>
         </main>
