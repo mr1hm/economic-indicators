@@ -32,9 +32,9 @@ export default class Graphs extends Component {
 
   render() {
     return (
-      <canvas id="canvas" style={{ width: '650px', height: '400px' }}>
-
-      </canvas>
+      <div className="graph d-flex">
+        <canvas id="canvas" ref={this.canvasRef} style={{ width: '650px', height: '400px' }} />
+      </div>
     );
   }
 }
