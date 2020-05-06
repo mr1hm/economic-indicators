@@ -165,11 +165,16 @@ export default class App extends Component {
       <>
         <Header />
         <main className="container-fluid main-container">
-          <section className="row graph-container">
+          <section className="row country-selection">
             <div className="col d-flex">
-              <select onChange={this.handleCountrySelect} className="country-select" name="countryView">
+              <label className="country-select-label">Country</label>
+              <select onChange={this.handleCountrySelect} className="" name="countryView">
                 {GDPandPopulation.map((val, i) => <option key={i}>{val.country.value}</option>)}
               </select>
+            </div>
+          </section>
+          <section className="row graph-container">
+            <div className="col d-flex">
               {countryView ? <Graphs countryView={countryView} GDPandPopulation={GDPandPopulation} /> : null}
             </div>
           </section>
