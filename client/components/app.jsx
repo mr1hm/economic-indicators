@@ -17,8 +17,10 @@ export default class App extends Component {
         GDPagricultureAndConstruction: [],
         GDPmanufacturing: [],
         GDPservices: [],
-      }
+      },
+      countryView: '',
     }
+    this.handleCountrySelect = this.handleCountrySelect.bind(this)
   }
 
   componentDidMount() {
@@ -147,8 +149,13 @@ export default class App extends Component {
       .catch(err => console.error(err));
   };
 
+  handleCountrySelect(e) {
+    const name = e.target.name, value = e.target.value
+    this.setState({ [name]: value })
+  }
+
   render() {
-    const { GDPandPopulation, UnemploymentRate, InflationRate } = this.state.data;
+    const { data: { GDPandPopulation, UnemploymentRate, InflationRate }, countryView } = this.state;
     if (this.state.loading) {
       return (
         <Loading loading={this.state.loading} />
@@ -160,7 +167,10 @@ export default class App extends Component {
         <main className="container-fluid main-container">
           <section className="row graph-container">
             <div className="col d-flex">
-              <Graphs GDPandPopulation={GDPandPopulation} />
+              <select onChange={this.handleCountrySelect} className="country-select" name="countryView">
+                {GDPandPopulation.map((val, i) => <option key={i}>{val.country.value}</option>)}
+              </select>
+              {countryView ? <Graphs countryView={countryView} GDPandPopulation={GDPandPopulation} /> : null}
             </div>
           </section>
         </main>
