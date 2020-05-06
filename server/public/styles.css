@@ -39,8 +39,16 @@ body {
   to {width: 100%; }
 }
 
+.graph-container {
+  padding: 10px;
+}
+
 .loading-spinner {
   height: 100%;
+}
+
+.header-container {
+  border: 1px solid black;
 }
 
 .header-container h1 {
@@ -52,5 +60,25 @@ body {
 .header-title {
   border: 1px solid black;
   padding: 5px;
+  margin: 5px;
+}
+
+.footer-container {
+  border: 1px solid black;
+}
+
+.footer-container h1 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 14px;
+}
+
+.footer-title {
+  border: 1px solid black;
+  padding: 5px;
+  margin: 5px;
+}
+
+.copyright-icon {
   margin: 5px;
 }

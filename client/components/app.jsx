@@ -158,8 +158,8 @@ export default class App extends Component {
       <>
         <Header />
         <main className="container-fluid main-container">
-          <section className="row">
-            <div className="col">
+          <section className="row graph-container">
+            <div className="col d-flex">
               <Graphs GDPandPopulation={GDPandPopulation} />
             </div>
           </section>

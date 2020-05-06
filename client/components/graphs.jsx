@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 export default class Graphs extends Component {
   constructor(props) {
     super(props);
+    this.canvasRef = React.createRef();
     this.state = {
       xAxis: [],
       yAxis: [],
@@ -11,6 +12,9 @@ export default class Graphs extends Component {
   }
 
   componentDidMount() {
+    const canvas = this.canvasRef.current
+    const context = canvas.getContext('2d');
+    context.fillRect(0, 0, canvas.width, canvas.height)
     this.createDataPlots()
   }
 
@@ -28,9 +32,9 @@ export default class Graphs extends Component {
 
   render() {
     return (
-      <canvas id="canvas" style={{ width: '650px', height: '400px' }}>
-
-      </canvas>
+      <div className="graph d-flex">
+        <canvas id="canvas" ref={this.canvasRef} style={{ width: '650px', height: '400px' }} />
+      </div>
     );
   }
 }
