@@ -9,6 +9,19 @@ export default class Footer extends Component {
   }
 
   render() {
-    return null;
+    return (
+      <footer className="footer-container container-fluid">
+        <section className="row">
+          <div className="col d-flex">
+            <h1 className="footer-title">Footer</h1>
+          </div>
+        </section>
+        <section className="row">
+          <div className="col d-flex">
+            <i class="far fa-copyright copyright-icon"></i>
+          </div>
+        </section>
+      </footer>
+    );
   }
 }
