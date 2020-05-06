@@ -19,6 +19,7 @@ export default class Footer extends Component {
         <section className="row">
           <div className="col d-flex">
             <i className="far fa-copyright copyright-icon"></i>
+            <span>Sam is never online</span>
           </div>
         </section>
       </footer>
