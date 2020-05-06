@@ -67,6 +67,15 @@ body {
   margin: 5px;
 }
 
+.country-select-label {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.country-selection {
+  margin: 5px;
+}
+
 .footer-container {
   border: 1px solid black;
 }
