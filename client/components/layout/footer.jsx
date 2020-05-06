@@ -18,7 +18,7 @@ export default class Footer extends Component {
         </section>
         <section className="row">
           <div className="col d-flex">
-            <i class="far fa-copyright copyright-icon"></i>
+            <i className="far fa-copyright copyright-icon"></i>
           </div>
         </section>
       </footer>

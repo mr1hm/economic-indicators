@@ -2,6 +2,10 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 
+#canvas {
+  border: 1px solid #d3d3d3;
+}
+
 #spinner {
   text-transform: uppercase;
   height: 40px;
