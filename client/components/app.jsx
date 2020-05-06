@@ -18,7 +18,7 @@ export default class App extends Component {
         GDPmanufacturing: [],
         GDPservices: [],
       },
-      countryView: '',
+      countryView: 'Arab World',
     }
     this.handleCountrySelect = this.handleCountrySelect.bind(this)
   }
