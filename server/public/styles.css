@@ -39,8 +39,16 @@ body {
   to {width: 100%; }
 }
 
+.graph-container {
+  padding: 10px;
+}
+
 .loading-spinner {
   height: 100%;
+}
+
+.header-container {
+  border: 1px solid black;
 }
 
 .header-container h1 {
