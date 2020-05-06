@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 export default class Graphs extends Component {
   constructor(props) {
     super(props);
+    this.canvasRef = React.createRef();
     this.state = {
       xAxis: [],
       yAxis: [],
