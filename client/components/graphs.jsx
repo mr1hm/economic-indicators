@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Chart from 'chart.js';
 
 export default class Graphs extends Component {
   constructor(props) {
