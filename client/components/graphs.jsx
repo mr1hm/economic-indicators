@@ -12,6 +12,9 @@ export default class Graphs extends Component {
   }
 
   componentDidMount() {
+    const canvas = this.canvasRef.current
+    const context = canvas.getContext('2d');
+    context.fillRect(0, 0, canvas.width, canvas.height)
     this.createDataPlots()
   }
 
