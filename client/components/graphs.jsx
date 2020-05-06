@@ -22,10 +22,31 @@ export default class Graphs extends Component {
     for (let i = 2005; i <= 2020; i++) {
       xAxis.push(i.toString())
     }
+    let year = 2005;
     for (let j = 0; j < GDPandPopulation.length; j++) {
-      yAxis.push(GDPandPopulation[j].country.value)
+      yAxis.push(GDPandPopulation[j].populationByYear[year])
+      year++;
     }
-    this.setState({ xAxis, yAxis })
+    this.setState({ xAxis, yAxis }, () => {
+      const chartRef = this.canvasRef.current.getContext('2d');
+
+      new Chart(chartRef, {
+        type: 'line',
+        data: {
+          // Bring in data
+          labels: this.state.xAxis,
+          datasets: [
+            {
+              label: 'Population',
+              data: this.state.yAxis,
+            }
+          ]
+        },
+        options: {
+          // Customize chart options
+        }
+      });
+    })
   }
 
   render() {
