@@ -149,8 +149,13 @@ export default class App extends Component {
       .catch(err => console.error(err));
   };
 
+  handleCountrySelect(e) {
+    const name = e.target.name, value = e.target.value
+    this.setState({ [name]: value })
+  }
+
   render() {
-    const { GDPandPopulation, UnemploymentRate, InflationRate } = this.state.data;
+    const { data: { GDPandPopulation, UnemploymentRate, InflationRate }, countryView } = this.state;
     if (this.state.loading) {
       return (
         <Loading loading={this.state.loading} />
