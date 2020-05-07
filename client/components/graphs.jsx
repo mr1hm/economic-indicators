@@ -37,27 +37,40 @@ export default class Graphs extends Component {
         yAxis.push(findCountry.populationByYear[key]);
       }
     }
-    this.setState({ xAxis, yAxis }, () => {
+    for (const key in findCountry.totalGDPByYear) {
+      if (key >= year) {
+        totalGDP.push(findCountry.totalGDPByYear[key]);
+      }
+    }
+    this.setState({ xAxis, yAxis, totalGDP }, () => {
       const chartRef = this.canvasRef.current.getContext('2d');
 
       if (typeof lineGraph !== 'undefined') lineGraph.destroy();
 
-      lineGraph = new Chart(chartRef, {
-        type: 'line',
-        data: {
-          // Bring in data
-          labels: this.state.xAxis,
-          datasets: [
-            {
-              label: 'Population',
-              data: this.state.yAxis,
-            }
-          ]
-        },
-        options: {
-          // Customize chart options
-        }
-      });
+      if (GDPandPopulation) {
+        lineGraph = new Chart(chartRef, {
+          type: 'line',
+          data: {
+            // Bring in data
+            labels: this.state.xAxis,
+            datasets: [
+              {
+                label: 'Population',
+                data: this.state.yAxis,
+                borderColor: '#6610f2'
+              },
+              {
+                label: 'Total GDP',
+                data: this.state.totalGDP,
+                borderColor: '#008000',
+              }
+            ]
+          },
+          options: {
+            // Customize chart options
+          }
+        });
+      }
     })
   }
 
