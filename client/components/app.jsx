@@ -174,8 +174,11 @@ export default class App extends Component {
             </div>
           </section>
           <section className="row graph-container">
-            <div className="col d-flex">
+            <div className="col-6 d-flex">
               {countryView ? <Graphs countryView={countryView} GDPandPopulation={GDPandPopulation} /> : null}
+            </div>
+            <div className="col-6 d-flex">
+              {countryView ? <Graphs countryView={countryView} interestRate={interestRate} /> : null}
             </div>
           </section>
         </main>
