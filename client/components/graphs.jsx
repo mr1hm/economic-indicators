@@ -52,31 +52,28 @@ export default class Graphs extends Component {
       const chartRef = this.canvasRef.current.getContext('2d');
 
       if (typeof lineGraph !== 'undefined') lineGraph.destroy();
-
-      if (GDPandPopulation) {
-        lineGraph = new Chart(chartRef, {
-          type: 'line',
-          data: {
-            // Bring in data
-            labels: this.state.xAxis,
-            datasets: [
-              {
-                label: 'Population',
-                data: this.state.yAxis,
-                borderColor: '#6610f2'
-              },
-              {
-                label: 'Total GDP',
-                data: this.state.totalGDP,
-                borderColor: '#008000',
-              }
-            ]
-          },
-          options: {
-            // Customize options here
-          }
-        });
-      }
+      lineGraph = new Chart(chartRef, {
+        type: 'line',
+        data: {
+          // Bring in data
+          labels: this.state.xAxis,
+          datasets: [
+            {
+              label: GDPandPopulation ? 'Population' : 'Interest Rate',
+              data: this.state.yAxis,
+              borderColor: '#6610f2'
+            },
+            {
+              label: GDPandPopulation ? 'Total GDP' : '',
+              data: this.state.totalGDP,
+              borderColor: '#008000',
+            }
+          ]
+        },
+        options: {
+          // Customize options here
+        }
+      });
     })
   }
 
