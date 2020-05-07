@@ -144,7 +144,7 @@ export default class App extends Component {
         console.log('GDP from Agriculture and Construction:', GDPAgricultureAndConstruction)
         console.log('GDP from Manufacturing and Mining:', GDPManufacturingAndMining)
         console.log('GDP from Services:', GDPServices)
-        this.setState({ data: { ...this.state.data, GDPandPopulation, interestRate } })
+        this.setState({ data: { ...this.state.data, GDPandPopulation, interestRate, unemploymentRate, inflationRate, GDPGrowthRate } })
       })
       .catch(err => console.error(err));
   };
