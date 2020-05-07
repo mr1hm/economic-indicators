@@ -144,7 +144,7 @@ export default class App extends Component {
         console.log('GDP from Agriculture and Construction:', GDPAgricultureAndConstruction)
         console.log('GDP from Manufacturing and Mining:', GDPManufacturingAndMining)
         console.log('GDP from Services:', GDPServices)
-        this.setState({ data: { ...this.state.data, GDPandPopulation, interestRate } })
+        this.setState({ data: { ...this.state.data, GDPandPopulation, interestRate, unemploymentRate, inflationRate, GDPGrowthRate } })
       })
       .catch(err => console.error(err));
   };
@@ -155,7 +155,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { data: { GDPandPopulation, UnemploymentRate, InflationRate }, countryView } = this.state;
+    const { data: { GDPandPopulation, interestRate, unemploymentRate, inflationRate }, countryView } = this.state;
     if (this.state.loading) {
       return (
         <Loading loading={this.state.loading} />
@@ -174,8 +174,11 @@ export default class App extends Component {
             </div>
           </section>
           <section className="row graph-container">
-            <div className="col d-flex">
+            <div className="col-6 d-flex">
               {countryView ? <Graphs countryView={countryView} GDPandPopulation={GDPandPopulation} /> : null}
+            </div>
+            <div className="col-6 d-flex">
+              {countryView ? <Graphs countryView={countryView} interestRate={interestRate} /> : null}
             </div>
           </section>
         </main>
