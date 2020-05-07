@@ -70,10 +70,15 @@ body {
 .country-select-label {
   font-size: 12px;
   text-transform: uppercase;
+  margin: 5px;
 }
 
 .country-selection {
   margin: 5px;
+}
+
+.country-selection-box {
+  font-size: 12px;
 }
 
 .footer-container {
