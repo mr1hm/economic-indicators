@@ -24,13 +24,19 @@ export default class Graphs extends Component {
   }
 
   createLineChart() {
-    const { GDPandPopulation, countryView } = this.props;
+    const { GDPandPopulation, interestRate, countryView } = this.props;
     let xAxis = [], yAxis = [], totalGDP = [], countryAndValue = [];
     for (let i = 2005; i <= 2020; i++) {
       xAxis.push(i.toString())
     }
-    let year = '2005';
-    const findCountry = GDPandPopulation.find(val => val.country.value === countryView)
+    let year = '2005', findCountry;
+    // NEED TO FIGURE OUT A BETTER WAY TO AUTOMATE THIS.
+    if (GDPandPopulation) {
+      findCountry = GDPandPopulation.find(val => val.country.value === countryView)
+    }
+    if (interestRate) {
+      findCountry = interestRate.find(val => val.country.value === countryView)
+    }
     if (!findCountry) console.log('woops, that country doesnt exist');
     for (const key in findCountry.populationByYear) {
       if (key >= year) {
