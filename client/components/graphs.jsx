@@ -25,15 +25,11 @@ export default class Graphs extends Component {
 
   createLineChart() {
     const { GDPandPopulation, countryView } = this.props;
-    let xAxis = [], yAxis = [], countryAndValue = [];
+    let xAxis = [], yAxis = [], totalGDP = [], countryAndValue = [];
     for (let i = 2005; i <= 2020; i++) {
       xAxis.push(i.toString())
     }
     let year = '2005';
-    // for (let j = 0; j < GDPandPopulation.length; j++) {
-    //   yAxis.push(GDPandPopulation[j].populationByYear[year])
-    //   year++;
-    // }
     const findCountry = GDPandPopulation.find(val => val.country.value === countryView)
     if (!findCountry) console.log('woops, that country doesnt exist');
     for (const key in findCountry.populationByYear) {
