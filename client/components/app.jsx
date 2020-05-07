@@ -167,8 +167,8 @@ export default class App extends Component {
         <main className="container-fluid main-container">
           <section className="row country-selection">
             <div className="col d-flex">
-              <label className="country-select-label">Country</label>
-              <select onChange={this.handleCountrySelect} className="" name="countryView">
+              <label className="d-flex align-items-center country-select-label">Country</label>
+              <select onChange={this.handleCountrySelect} className="country-selection-box" name="countryView">
                 {GDPandPopulation.map((val, i) => <option key={i}>{val.country.value}</option>)}
               </select>
             </div>
