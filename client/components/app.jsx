@@ -155,7 +155,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { data: { GDPandPopulation, UnemploymentRate, InflationRate }, countryView } = this.state;
+    const { data: { GDPandPopulation, interestRate, unemploymentRate, inflationRate }, countryView } = this.state;
     if (this.state.loading) {
       return (
         <Loading loading={this.state.loading} />
