@@ -67,7 +67,7 @@ export default class Graphs extends Component {
             ]
           },
           options: {
-            // Customize chart options
+            // Customize options here
           }
         });
       }
