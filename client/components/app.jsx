@@ -154,7 +154,8 @@ export default class App extends Component {
           acc.push(country)
           return acc;
         }, [])
-        const GDPandPopulation = [...new Set(reduceTotalGDPandPopulationData)]
+        const totalGDP = [...new Set(reduceTotalGDPData)]
+        const totalPopulation = [...new Set(reduceTotalPopulationData)]
         const interestRate = [...new Set(reduceInterestRateData)]
         const unemploymentRate = [...new Set(reduceUnemploymentRateData)]
         const inflationRate = [...new Set(reduceInflationRateData)]
@@ -162,7 +163,8 @@ export default class App extends Component {
         const GDPAgricultureAndConstruction = [...new Set(reduceAgrilcultureAndConstructionData)]
         const GDPManufacturingAndMining = [...new Set(reduceGDPManufacturingAndMiningData)]
         const GDPServices = [...new Set(reduceGDPServicesData)]
-        console.log('GDP and Population:', GDPandPopulation)
+        console.log('Total GDP:', totalGDP)
+        console.log('Total Population:', totalPopulation)
         console.log('Interest Rate:', interestRate)
         console.log('Unemployment Rate:', unemploymentRate)
         console.log('Inflation Rate:', inflationRate)
@@ -170,7 +172,7 @@ export default class App extends Component {
         console.log('GDP from Agriculture and Construction:', GDPAgricultureAndConstruction)
         console.log('GDP from Manufacturing and Mining:', GDPManufacturingAndMining)
         console.log('GDP from Services:', GDPServices)
-        this.setState({ data: { ...this.state.data, GDPandPopulation, interestRate, unemploymentRate, inflationRate, GDPGrowthRate } })
+        this.setState({ data: { ...this.state.data, totalGDP, totalPopulation, interestRate, unemploymentRate, inflationRate, GDPGrowthRate } })
       })
       .catch(err => console.error(err));
   };
@@ -181,7 +183,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { data: { GDPandPopulation, interestRate, unemploymentRate, inflationRate }, countryView } = this.state;
+    const { data: { totalGDP, totalPopulation, interestRate, unemploymentRate, inflationRate }, countryView } = this.state;
     if (this.state.loading) {
       return (
         <Loading loading={this.state.loading} />
