@@ -10,7 +10,18 @@ export default class App extends Component {
     this.state = {
       loading: true,
       data: {
-        GDPandPopulation: [],
+        totalGDP: [],
+        totalPopulation: [],
+        interestRate: [],
+        unemploymentRate: [],
+        inflationRate: [],
+        GDPagricultureAndConstruction: [],
+        GDPmanufacturing: [],
+        GDPservices: [],
+      },
+      graphArrays: {
+        totalGDP: [],
+        totalPopulation: [],
         interestRate: [],
         unemploymentRate: [],
         inflationRate: [],
@@ -43,7 +54,8 @@ export default class App extends Component {
     // Set year property to population value
     // Set property in first matching country called "years" and set it equal to yearsObj.
     // Push into new acc array.
-    const fetchPopulationAndGDP = fetch(`http://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD;SP.POP.TOTL?source=2&format=json&per_page=31680`) // Retrieves GDP and Population by Country.
+    const fetchTotalGDP = fetch(`http://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.CD?source=2&format=json&per_page=15850`) // Retrieves GDP and Population by Country.
+    const fetchTotalPopulation = fetch(`http://api.worldbank.org/v2/country/all/indicator/SP.POP.TOTL?source=2&format=json&per_page=15850`)
     const fetchLendingInterestRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/FR.INR.LEND?format=json&per_page=15850`)
     const fetchUnemploymentRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/SL.UEM.TOTL.ZS?format=json&per_page=15850`)
     const fetchInflationRate = fetch(`http://api.worldbank.org/v2/country/all/indicator/FP.CPI.TOTL.ZG?format=json&per_page=15850`)
