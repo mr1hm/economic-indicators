@@ -64,7 +64,8 @@ export default class App extends Component {
     const fetchGDPManufacturingAndMining = fetch(`http://api.worldbank.org/v2/country/all/indicator/NV.IND.MANF.ZS?source=2&format=json&per_page=31680`) // Need to find API query param for Mining.
     const fetchGDPServices = fetch(`http://api.worldbank.org/v2/country/all/indicator/NV.SRV.TOTL.ZS?format=json&per_page=31680`)
     Promise.all([
-      fetchPopulationAndGDP,
+      fetchTotalGDP,
+      fetchTotalPopulation,
       fetchLendingInterestRate,
       fetchUnemploymentRate,
       fetchInflationRate,
@@ -76,28 +77,41 @@ export default class App extends Component {
       .then(results => {
         console.log(results)
         // Instead of targeting these data sets separately, we can use a loop. Figure it out!
-        const totalGDPandPopulationData = results[0][1]
-        const interestRateData = results[1][1]
-        const unemploymentRateData = results[2][1]
-        const inflationRateData = results[3][1]
-        const GDPGrowthRateData = results[4][1] // GDP Growth Rate by year - percentage.
-        const GDPAgricultureAndConstructionData = results[5][1] // Percent of total GDP.
-        const GDPManufacturingAndMiningData = results[6][1] // Percent of total GDP.
-        const GDPServicesData = results[7][1]
-        let reduceTotalGDPandPopulationData = totalGDPandPopulationData.reduce((acc, val, i) => {
-          let yearsObj = {};
-          if (i > 15839) {
-            const country = totalGDPandPopulationData.find(element => element.country.id === val.country.id)
-            country.populationByYear = { ...country.populationByYear, [val.date]: val.value }
-            acc.push(country)
-            return acc;
-          } else {
-            const country = totalGDPandPopulationData.find(element => element.country.id === val.country.id)
-            country.totalGDPByYear = { ...country.totalGDPByYear, [val.date]: val.value }
-            acc.push(country)
-            return acc;
-          }
+        const totalGDPData = results[0][1]
+        const totalPopulationData = results[1][1]
+        const interestRateData = results[2][1]
+        const unemploymentRateData = results[3][1]
+        const inflationRateData = results[4][1]
+        const GDPGrowthRateData = results[5][1] // GDP Growth Rate by year - percentage.
+        const GDPAgricultureAndConstructionData = results[6][1] // Percent of total GDP.
+        const GDPManufacturingAndMiningData = results[7][1] // Percent of total GDP.
+        const GDPServicesData = results[8][1]
+        const reduceTotalGDPData = totalGDPData.reduce((acc, val, i) => {
+          const country = totalGDPData.find(element => element.country.id === val.country.id)
+          country.totalGDPByYear = { ...country.totalGDPByYear, [val.date]: val.value }
+          acc.push(country)
+          return acc;
         }, [])
+        const reduceTotalPopulationData = totalPopulationData.reduce((acc, val, i) => {
+          const country = totalPopulationData.find(element => element.country.id === val.country.id)
+          country.totalPopulationByYear = { ...country.totalPopulationByYear, [val.date]: val.value }
+          acc.push(country)
+          return acc;
+        }, [])
+        // let reduceTotalGDPandPopulationData = totalGDPandPopulationData.reduce((acc, val, i) => {
+        //   let yearsObj = {};
+        //   if (i > 15839) {
+        //     const country = totalGDPandPopulationData.find(element => element.country.id === val.country.id)
+        //     country.populationByYear = { ...country.populationByYear, [val.date]: val.value }
+        //     acc.push(country)
+        //     return acc;
+        //   } else {
+        //     const country = totalGDPandPopulationData.find(element => element.country.id === val.country.id)
+        //     country.totalGDPByYear = { ...country.totalGDPByYear, [val.date]: val.value }
+        //     acc.push(country)
+        //     return acc;
+        //   }
+        // }, [])
         const reduceInterestRateData = interestRateData.reduce((acc, val, i) => {
           const country = interestRateData.find(element => element.country.id === val.country.id)
           country.interestRateByYear = { ...country.interestRateByYear, [val.date]: val.value }
