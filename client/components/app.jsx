@@ -92,20 +92,6 @@ export default class App extends Component {
           acc.push(country)
           return acc;
         }, [])
-        // let reduceTotalGDPandPopulationData = totalGDPandPopulationData.reduce((acc, val, i) => {
-        //   let yearsObj = {};
-        //   if (i > 15839) {
-        //     const country = totalGDPandPopulationData.find(element => element.country.id === val.country.id)
-        //     country.populationByYear = { ...country.populationByYear, [val.date]: val.value }
-        //     acc.push(country)
-        //     return acc;
-        //   } else {
-        //     const country = totalGDPandPopulationData.find(element => element.country.id === val.country.id)
-        //     country.totalGDPByYear = { ...country.totalGDPByYear, [val.date]: val.value }
-        //     acc.push(country)
-        //     return acc;
-        //   }
-        // }, [])
         const reduceInterestRateData = interestRateData.reduce((acc, val, i) => {
           const country = interestRateData.find(element => element.country.id === val.country.id)
           country.interestRateByYear = { ...country.interestRateByYear, [val.date]: val.value }
