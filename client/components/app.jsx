@@ -15,21 +15,15 @@ export default class App extends Component {
         interestRate: [],
         unemploymentRate: [],
         inflationRate: [],
+        GDPGrowthRate: [],
         GDPagricultureAndConstruction: [],
         GDPmanufacturing: [],
         GDPservices: [],
       },
-      graphArrays: {
-        totalGDP: [],
-        totalPopulation: [],
-        interestRate: [],
-        unemploymentRate: [],
-        inflationRate: [],
-        GDPagricultureAndConstruction: [],
-        GDPmanufacturing: [],
-        GDPservices: [],
+      countryView: {
+        name: 'Arab World',
+        indicator: 'Total GDP ($)'
       },
-      countryView: 'Arab World',
     }
     this.handleCountrySelect = this.handleCountrySelect.bind(this)
   }
