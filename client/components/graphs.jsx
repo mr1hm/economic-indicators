@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
-let lineGraph;
+let lineGraph, lineGraph2, lineGraph3, lineGraph4, lineGraph5, lineGraph6;
 
 export default class Graphs extends Component {
   constructor(props) {
