@@ -197,16 +197,13 @@ export default class App extends Component {
             <div className="col d-flex">
               <label className="d-flex align-items-center country-select-label">Country</label>
               <select onChange={this.handleCountrySelect} className="country-selection-box" name="countryView">
-                {GDPandPopulation.map((val, i) => <option key={i}>{val.country.value}</option>)}
+                {totalGDP.map((val, i) => <option key={i}>{val.country.value}</option>)}
               </select>
             </div>
           </section>
           <section className="row graph-container">
             <div className="col-6 d-flex">
-              {countryView ? <Graphs countryView={countryView} GDPandPopulation={GDPandPopulation} /> : null}
-            </div>
-            <div className="col-6 d-flex">
-              {countryView ? <Graphs countryView={countryView} interestRate={interestRate} /> : null}
+              {countryView ? <Graphs countryView={countryView} data={this.state.data} /> : null}
             </div>
           </section>
         </main>
