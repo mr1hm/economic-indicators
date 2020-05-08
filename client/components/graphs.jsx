@@ -49,15 +49,10 @@ export default class Graphs extends Component {
           labels: this.state.xAxis,
           datasets: [
             {
-              label: GDPandPopulation ? 'Population' : 'Interest Rate',
+              label: 'Total GDP',
               data: this.state.yAxis,
               borderColor: '#6610f2'
             },
-            {
-              label: GDPandPopulation ? 'Total GDP' : '',
-              data: this.state.totalGDP,
-              borderColor: '#008000',
-            }
           ]
         },
         options: {
