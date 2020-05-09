@@ -73,7 +73,17 @@ export default class Graphs extends Component {
         options: {
           // Customize options here
           scales: {
+            xAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Year'
+              }
+            }],
             yAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Value'
+              },
               ticks: {
                 callback: function (value, index, values) {
                   if (value < 1000000) return value;
@@ -92,7 +102,7 @@ export default class Graphs extends Component {
   render() {
     return (
       <div className="graph d-flex">
-        <canvas id="canvas" ref={this.canvasRef} style={{ width: '700px', height: '100%' }} />
+        <canvas id="canvas" ref={this.canvasRef} style={{ width: '700px' }} />
       </div>
     );
   }
