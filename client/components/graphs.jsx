@@ -64,7 +64,7 @@ export default class Graphs extends Component {
           labels: this.state.xAxis,
           datasets: [
             {
-              label: 'Total GDP',
+              label: countryView.indicator,
               data: this.state.yAxis,
               borderColor: '#6610f2'
             },
