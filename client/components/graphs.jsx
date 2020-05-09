@@ -73,7 +73,17 @@ export default class Graphs extends Component {
         options: {
           // Customize options here
           scales: {
+            xAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Year'
+              }
+            }],
             yAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Value'
+              },
               ticks: {
                 callback: function (value, index, values) {
                   if (value < 1000000) return value;
