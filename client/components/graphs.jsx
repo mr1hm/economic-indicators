@@ -25,20 +25,35 @@ export default class Graphs extends Component {
 
   createLineChart() {
     const { data, countryView } = this.props;
+    const selectData = {
+      'Total GDP ($)': 'totalGDP',
+      'Total Population': 'totalPopulation',
+      'Interest Rate (%)': 'interestRate',
+      'Unemployment Rate (%)': 'unemploymentRate',
+      'Inflation Rate (%)': 'inflationRate',
+      'GDP Growth Rate (%)': 'GDPGrowthRate',
+    }
+    const indicators = {
+      'Total GDP ($)': 'totalGDPByYear',
+      'Total Population': 'totalPopulationByYear',
+      'Interest Rate (%)': 'interestRateByYear',
+      'Unemployment Rate (%)': 'unemploymentRateByYear',
+      'Inflation Rate (%)': 'inflationRateByYear',
+      'GDP Growth Rate (%)': 'GDPGrowthRateByYear',
+    }
     let xAxis = [], yAxis = [], totalGDP = [], countryAndValue = [];
-    for (let i = 2005; i <= 2020; i++) {
+    for (let i = 2000; i <= 2020; i++) {
       xAxis.push(i.toString())
     }
-    let year = '2005'
-    // NEED TO FIGURE OUT A BETTER WAY TO AUTOMATE THIS.
-    const findCountry = data.totalGDP.find(val => val.country.value === countryView)
+    let year = '2000'
+    const findCountry = data[selectData[countryView.indicator]].find(val => val.country.value === countryView.name)
     if (!findCountry) console.log('woops, that country doesnt exist');
-    for (const key in findCountry.totalGDPByYear) {
+    for (const key in findCountry[indicators[countryView.indicator]]) {
       if (key >= year) {
-        yAxis.push(findCountry.totalGDPByYear[key]);
+        yAxis.push(findCountry[indicators[countryView.indicator]][key]);
       }
     }
-    this.setState({ xAxis, yAxis, totalGDP }, () => {
+    this.setState({ xAxis, yAxis }, () => {
       const chartRef = this.canvasRef.current.getContext('2d');
 
       if (typeof lineGraph !== 'undefined') lineGraph.destroy();
