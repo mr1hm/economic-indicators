@@ -159,7 +159,6 @@ export default class App extends Component {
 
   handleCountrySelect(e) {
     const name = e.target.name, value = e.target.value
-    console.log(value)
     this.setState(prevState => ({ countryView: { ...prevState.countryView, [name]: value } }))
   }
 
