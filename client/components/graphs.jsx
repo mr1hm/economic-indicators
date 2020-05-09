@@ -42,6 +42,9 @@ export default class Graphs extends Component {
       'GDP Growth Rate (%)': 'GDPGrowthRateByYear',
     }
     let xAxis = [], yAxis = [], totalGDP = [], countryAndValue = [];
+
+    // Needs Year selection
+
     for (let i = 2000; i <= 2020; i++) {
       xAxis.push(i.toString())
     }
