@@ -52,7 +52,7 @@ body {
 }
 
 .header-container {
-  border: 1px solid black;
+  border: 2px solid black;
 }
 
 .header-container h1 {
@@ -67,22 +67,27 @@ body {
   margin: 5px;
 }
 
-.country-select-label {
+.country-select-label,
+.country-indicator-select-label {
   font-size: 12px;
   text-transform: uppercase;
   margin: 5px;
+  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 .country-selection {
   margin: 5px;
 }
 
-.country-selection-box {
+.country-selection-box,
+.country-indiciator-selection-box {
   font-size: 12px;
+  margin-top: 10px;
 }
 
 .footer-container {
-  border: 1px solid black;
+  border: 2px solid black;
 }
 
 .footer-container h1 {

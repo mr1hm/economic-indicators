@@ -1,3 +1,9 @@
-function reduceByCountry(dataArray, country) {
-  const reduced = dataArray.reduce((acc, val) => )
+function abbreviateNumbers(value) {
+  let noDotValue, suffixes = ['', 'K', 'M', 'T'];
+  if (value.includes('.')) noDotValue = value.split('.')[0];
+
+}
+
+module.exports = {
+  abbreviateNumbers
 }

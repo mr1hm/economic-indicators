@@ -15,21 +15,15 @@ export default class App extends Component {
         interestRate: [],
         unemploymentRate: [],
         inflationRate: [],
+        GDPGrowthRate: [],
         GDPagricultureAndConstruction: [],
         GDPmanufacturing: [],
         GDPservices: [],
       },
-      graphArrays: {
-        totalGDP: [],
-        totalPopulation: [],
-        interestRate: [],
-        unemploymentRate: [],
-        inflationRate: [],
-        GDPagricultureAndConstruction: [],
-        GDPmanufacturing: [],
-        GDPservices: [],
+      countryView: {
+        name: 'Arab World',
+        indicator: 'Total GDP ($)'
       },
-      countryView: 'Arab World',
     }
     this.handleCountrySelect = this.handleCountrySelect.bind(this)
   }
@@ -98,20 +92,6 @@ export default class App extends Component {
           acc.push(country)
           return acc;
         }, [])
-        // let reduceTotalGDPandPopulationData = totalGDPandPopulationData.reduce((acc, val, i) => {
-        //   let yearsObj = {};
-        //   if (i > 15839) {
-        //     const country = totalGDPandPopulationData.find(element => element.country.id === val.country.id)
-        //     country.populationByYear = { ...country.populationByYear, [val.date]: val.value }
-        //     acc.push(country)
-        //     return acc;
-        //   } else {
-        //     const country = totalGDPandPopulationData.find(element => element.country.id === val.country.id)
-        //     country.totalGDPByYear = { ...country.totalGDPByYear, [val.date]: val.value }
-        //     acc.push(country)
-        //     return acc;
-        //   }
-        // }, [])
         const reduceInterestRateData = interestRateData.reduce((acc, val, i) => {
           const country = interestRateData.find(element => element.country.id === val.country.id)
           country.interestRateByYear = { ...country.interestRateByYear, [val.date]: val.value }
@@ -179,10 +159,12 @@ export default class App extends Component {
 
   handleCountrySelect(e) {
     const name = e.target.name, value = e.target.value
-    this.setState({ [name]: value })
+    console.log(value)
+    this.setState(prevState => ({ countryView: { ...prevState.countryView, [name]: value } }))
   }
 
   render() {
+    const indicators = ['Total GDP ($)', 'Total Population', 'Interest Rate (%)', 'Unemployment Rate (%)', 'Inflation Rate (%)', 'GDP Growth Rate (%)'];
     const { data: { totalGDP, totalPopulation, interestRate, unemploymentRate, inflationRate }, countryView } = this.state;
     if (this.state.loading) {
       return (
@@ -196,8 +178,12 @@ export default class App extends Component {
           <section className="row country-selection">
             <div className="col d-flex">
               <label className="d-flex align-items-center country-select-label">Country</label>
-              <select onChange={this.handleCountrySelect} className="country-selection-box" name="countryView">
+              <select onChange={this.handleCountrySelect} className="country-selection-box" name="name">
                 {totalGDP.map((val, i) => <option key={i}>{val.country.value}</option>)}
+              </select>
+              <label className="d-flex align-items-center country-indicator-select-label">Indicators</label>
+              <select onChange={this.handleCountrySelect} className="country-indiciator-selection-box" name="indicator">
+                {indicators.map((val, i) => <option key={i}>{val}</option>)}
               </select>
             </div>
           </section>
