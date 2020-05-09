@@ -159,10 +159,12 @@ export default class App extends Component {
 
   handleCountrySelect(e) {
     const name = e.target.name, value = e.target.value
-    this.setState({ [name]: value })
+    console.log(value)
+    this.setState(prevState => ({ countryView: { ...prevState.countryView, [name]: value } }))
   }
 
   render() {
+    const indicators = ['Total GDP ($)', 'Total Population', 'Interest Rate (%)', 'Unemployment Rate (%)', 'Inflation Rate (%)', 'GDP Growth Rate (%)'];
     const { data: { totalGDP, totalPopulation, interestRate, unemploymentRate, inflationRate }, countryView } = this.state;
     if (this.state.loading) {
       return (
