@@ -10,7 +10,6 @@ export default class Graphs extends Component {
     this.state = {
       xAxis: [],
       yAxis: [],
-      totalGDP: [],
       countryAndValue: [],
       updated: false,
     }
