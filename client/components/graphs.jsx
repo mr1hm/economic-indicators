@@ -72,6 +72,18 @@ export default class Graphs extends Component {
         },
         options: {
           // Customize options here
+          scales: {
+            yAxes: [{
+              ticks: {
+                callback: function (value, index, values) {
+                  if (value < 1000000) return value;
+                  if (value >= 1000000000000) return value / 1e12 + 'T';
+                  if (value >= 1000000000) return value / 1e9 + 'B';
+                  if (value >= 1000000) return value / 1e6 + 'M';
+                }
+              }
+            }]
+          }
         }
       });
     })
