@@ -44,6 +44,7 @@ export default class Graphs extends Component {
     let xAxis = [], yAxis = [], totalGDP = [], countryAndValue = [];
 
     // Needs Year selection
+    // Work out logic for handling multiple graphs
 
     for (let i = 2000; i <= 2020; i++) {
       xAxis.push(i.toString())
