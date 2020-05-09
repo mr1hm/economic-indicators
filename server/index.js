@@ -17,6 +17,8 @@ app.get('/api/health-check', (req, res, next) => {
 })
 
 // Routes go here
+app.post('/api/countries', db.storeCountries);
+
 
 app.use('/api', (req, res, next) => {
   next(new ClientError(`cannot ${req.method} ${req.originalUrl}`, 404));
