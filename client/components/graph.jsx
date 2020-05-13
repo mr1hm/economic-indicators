@@ -139,7 +139,7 @@ export default class Graph extends Component {
           </div>
           <div className="col-6 d-flex">
             <div className="graph d-flex">
-              <GraphTwo countryView={countryView} data={this.props.data} handleCountrySelect={handleCountrySelect} />
+              {/* <GraphTwo countryView={countryView} data={this.props.data} handleCountrySelect={handleCountrySelect} /> */}
             </div>
           </div>
         </section>
