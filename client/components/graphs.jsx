@@ -104,10 +104,30 @@ export default class Graphs extends Component {
   }
 
   render() {
+    const { data: { totalGDP }, } = this.props
+    const indicators = ['Total GDP ($)', 'Total Population', 'Interest Rate (%)', 'Unemployment Rate (%)', 'Inflation Rate (%)', 'GDP Growth Rate (%)'];
     return (
-      <div className="graph d-flex">
-        <canvas id="canvas" ref={this.canvasRef} style={{ width: '700px' }} />
-      </div>
+      <>
+        <section className="row country-selection">
+          <div className="col d-flex">
+            <label className="d-flex align-items-center country-select-label">Country</label>
+            <select onChange={this.handleCountrySelect} className="country-selection-box" name="name">
+              {totalGDP.map((val, i) => <option key={i}>{val.country.value}</option>)}
+            </select>
+            <label className="d-flex align-items-center country-indicator-select-label">Indicators</label>
+            <select onChange={this.handleCountrySelect} className="country-indiciator-selection-box" name="indicator">
+              {indicators.map((val, i) => <option key={i}>{val}</option>)}
+            </select>
+          </div>
+        </section>
+        <section className="row graph-container">
+          <div className="col d-flex">
+            <div className="graph d-flex">
+              <canvas id="canvas" ref={this.canvasRef} style={{ width: '700px' }} />
+            </div>
+          </div>
+        </section>
+      </>
     );
   }
 }

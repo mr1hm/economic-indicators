@@ -193,23 +193,7 @@ export default class App extends Component {
       <>
         <Header />
         <main className="container-fluid main-container">
-          <section className="row country-selection">
-            <div className="col d-flex">
-              <label className="d-flex align-items-center country-select-label">Country</label>
-              <select onChange={this.handleCountrySelect} className="country-selection-box" name="name">
-                {totalGDP.map((val, i) => <option key={i}>{val.country.value}</option>)}
-              </select>
-              <label className="d-flex align-items-center country-indicator-select-label">Indicators</label>
-              <select onChange={this.handleCountrySelect} className="country-indiciator-selection-box" name="indicator">
-                {indicators.map((val, i) => <option key={i}>{val}</option>)}
-              </select>
-            </div>
-          </section>
-          <section className="row graph-container">
-            <div className="col-6 d-flex">
-              {countryView ? <Graphs countryView={countryView} data={this.state.data} /> : null}
-            </div>
-          </section>
+          <Graphs countryView={countryView} data={this.state.data} handleCountrySelect={this.handleCountrySelect} />
         </main>
         <Footer />
       </>
