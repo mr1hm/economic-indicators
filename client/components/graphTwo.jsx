@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 import { abbreviateNumbers } from './lib/helperFunctions';
-let lineGraph, lineGraph2, lineGraph3, lineGraph4, lineGraph5, lineGraph6;
+let lineGraph;
 
-export default class Graphs extends Component {
+export default class GraphTwo extends Component {
   constructor(props) {
     super(props);
     this.canvasRef = React.createRef();
@@ -76,6 +76,16 @@ export default class Graphs extends Component {
         },
         options: {
           // Customize options here
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              top: 5,
+              left: 15,
+              right: 15,
+              bottom: 15
+            },
+          },
           scales: {
             xAxes: [{
               scaleLabel: {
@@ -104,18 +114,18 @@ export default class Graphs extends Component {
   }
 
   render() {
-    const { data: { totalGDP }, } = this.props
+    const { data: { totalGDP }, handleCountrySelect } = this.props
     const indicators = ['Total GDP ($)', 'Total Population', 'Interest Rate (%)', 'Unemployment Rate (%)', 'Inflation Rate (%)', 'GDP Growth Rate (%)'];
     return (
       <>
         <section className="row country-selection">
-          <div className="col d-flex">
+          <div className="col-6 d-flex">
             <label className="d-flex align-items-center country-select-label">Country</label>
-            <select onChange={this.handleCountrySelect} className="country-selection-box" name="name">
+            <select onChange={handleCountrySelect} className="country-selection-box" name="name">
               {totalGDP.map((val, i) => <option key={i}>{val.country.value}</option>)}
             </select>
             <label className="d-flex align-items-center country-indicator-select-label">Indicators</label>
-            <select onChange={this.handleCountrySelect} className="country-indiciator-selection-box" name="indicator">
+            <select onChange={handleCountrySelect} className="country-indiciator-selection-box" name="indicator">
               {indicators.map((val, i) => <option key={i}>{val}</option>)}
             </select>
           </div>

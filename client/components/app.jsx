@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './layout/header';
 import Footer from './layout/footer';
 import Loading from './layout/loading';
-import Graphs from './graphs';
+import Graph from './graph';
 
 export default class App extends Component {
   constructor(props) {
@@ -193,7 +193,7 @@ export default class App extends Component {
       <>
         <Header />
         <main className="container-fluid main-container">
-          <Graphs countryView={countryView} data={this.state.data} handleCountrySelect={this.handleCountrySelect} />
+          <Graph countryView={countryView} data={this.state.data} handleCountrySelect={this.handleCountrySelect} />
         </main>
         <Footer />
       </>
