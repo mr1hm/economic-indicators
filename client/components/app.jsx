@@ -143,25 +143,26 @@ export default class App extends Component {
         const GDPAgricultureAndConstruction = [...new Set(reduceAgrilcultureAndConstructionData)]
         const GDPManufacturingAndMining = [...new Set(reduceGDPManufacturingAndMiningData)]
         const GDPServices = [...new Set(reduceGDPServicesData)]
-        let countries = [];
-        for (let i = 0; i < totalGDP.length; i++) {
-          const countryObj = {}
-          countryObj.countryName = totalGDP[i].country.value
-          countryObj.countryiso3code = totalGDP[i].countryiso3code
-          countries.push(countryObj)
-        }
-        fetch(`/api/countries`, {
-          method: 'POST',
-          body: JSON.stringify({ countries }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-          .then(res => res.json())
-          .then(storedData => {
-            console.log(storedData)
-          })
-          .catch(err => console.error(err));
+        // The code below was used to store country names and iso3 codes to the database.
+        // let countries = [];
+        // for (let i = 0; i < totalGDP.length; i++) {
+        //   const countryObj = {}
+        //   countryObj.countryName = totalGDP[i].country.value
+        //   countryObj.countryiso3code = totalGDP[i].countryiso3code
+        //   countries.push(countryObj)
+        // }
+        // fetch(`/api/countries`, {
+        //   method: 'POST',
+        //   body: JSON.stringify({ countries }),
+        //   headers: {
+        //     'Content-Type': 'application/json'
+        //   }
+        // })
+        //   .then(res => res.json())
+        //   .then(storedData => {
+        //     console.log(storedData)
+        //   })
+        //   .catch(err => console.error(err));
         console.log('Total GDP:', totalGDP)
         console.log('Total Population:', totalPopulation)
         console.log('Interest Rate:', interestRate)
