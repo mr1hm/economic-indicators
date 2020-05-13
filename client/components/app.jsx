@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from './layout/header';
 import Footer from './layout/footer';
 import Loading from './layout/loading';
-import Graphs from './graphs';
+import Graph from './graph';
 
 export default class App extends Component {
   constructor(props) {
