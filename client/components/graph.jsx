@@ -77,6 +77,10 @@ export default class Graph extends Component {
         },
         options: {
           // Customize options here
+          title: {
+            display: true,
+            text: countryView.name
+          },
           responsive: true,
           maintainAspectRatio: false,
           layout: {
