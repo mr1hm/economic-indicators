@@ -24,8 +24,13 @@ export default class App extends Component {
         name: 'Arab World',
         indicator: 'Total GDP ($)'
       },
+      countryView2: {
+        name2: 'Arab World',
+        indicator2: 'Total GDP ($)'
+      },
     }
     this.handleCountrySelect = this.handleCountrySelect.bind(this)
+    this.handleCountrySelect2 = this.handleCountrySelect2.bind(this)
   }
 
   componentDidMount() {
@@ -182,9 +187,14 @@ export default class App extends Component {
     this.setState(prevState => ({ countryView: { ...prevState.countryView, [name]: value } }))
   }
 
+  handleCountrySelect2(e) {
+    const name = e.target.name, value = e.target.value
+    this.setState(prevState => ({ countryView2: { ...prevState.countryView2, [name]: value } }))
+  }
+
   render() {
     const indicators = ['Total GDP ($)', 'Total Population', 'Interest Rate (%)', 'Unemployment Rate (%)', 'Inflation Rate (%)', 'GDP Growth Rate (%)'];
-    const { data: { totalGDP, totalPopulation, interestRate, unemploymentRate, inflationRate }, countryView } = this.state;
+    const { data: { totalGDP, totalPopulation, interestRate, unemploymentRate, inflationRate }, countryView, countryView2 } = this.state;
     if (this.state.loading) {
       return (
         <Loading loading={this.state.loading} />
@@ -194,7 +204,7 @@ export default class App extends Component {
       <>
         <Header />
         <main className="container-fluid main-container">
-          <Graph countryView={countryView} data={this.state.data} handleCountrySelect={this.handleCountrySelect} />
+          <Graph countryView={countryView} countryView2={countryView2} data={this.state.data} handleCountrySelect={this.handleCountrySelect} handleCountrySelect2={this.handleCountrySelect2} />
         </main>
         <Footer />
       </>
