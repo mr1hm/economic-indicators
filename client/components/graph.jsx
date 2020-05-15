@@ -77,11 +77,11 @@ export default class Graph extends Component {
         type: 'line',
         data: {
           // Bring in data
-          labels: this.state.xAxis,
+          labels: this.state.graph1.xAxis,
           datasets: [
             {
               label: countryView.indicator,
-              data: this.state.yAxis,
+              data: this.state.graph1.yAxis,
               borderColor: '#6610f2'
             },
           ]
