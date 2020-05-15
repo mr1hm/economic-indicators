@@ -2,17 +2,28 @@ import React, { Component } from 'react';
 import Chart from 'chart.js';
 import { abbreviateNumbers } from './lib/helperFunctions';
 import GraphTwo from './graphTwo';
-let lineGraph;
+let lineGraph, lineGraph2;
 
 export default class Graph extends Component {
   constructor(props) {
     super(props);
     this.canvasRef = React.createRef();
+    this.canvasRef2 = React.createRef();
     this.state = {
-      xAxis: [],
-      yAxis: [],
+      graph1: {
+        xAxis: [],
+        yAxis: [],
+      },
+      graph2: {
+        xAxis: [],
+        yAxis: [],
+      },
       countryAndValue: [],
       updated: false,
+      countryView: {
+        name: 'Arab World',
+        indicator: 'Total GDP ($)'
+      },
     }
   }
 
