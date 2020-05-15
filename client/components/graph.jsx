@@ -202,16 +202,26 @@ export default class Graph extends Component {
               {indicators.map((val, i) => <option key={i}>{val}</option>)}
             </select>
           </div>
+          <div className="col d-flex">
+            <label className="d-flex align-items-center country-select-label">Country</label>
+            <select onChange={handleCountrySelect2} className="country-selection-box" name="name2">
+              {totalGDP.map((val, i) => <option key={i}>{val.country.value}</option>)}
+            </select>
+            <label className="d-flex align-items-center country-indicator-select-label">Indicators</label>
+            <select onChange={handleCountrySelect2} className="country-indiciator-selection-box" name="indicator2">
+              {indicators.map((val, i) => <option key={i}>{val}</option>)}
+            </select>
+          </div>
         </section>
         <section className="row graph-container">
           <div className="col-6 d-flex">
             <div className="graph d-flex">
-              <canvas id="canvas" ref={this.canvasRef} style={{ width: '700px' }} />
+              <canvas id="canvas" ref={this.canvasRef} />
             </div>
           </div>
           <div className="col-6 d-flex">
             <div className="graph d-flex">
-              {/* <GraphTwo countryView={countryView} data={this.props.data} handleCountrySelect={handleCountrySelect} /> */}
+              <canvas id="canvas" ref={this.canvasRef2} style={{ width: '700px' }} />
             </div>
           </div>
         </section>
