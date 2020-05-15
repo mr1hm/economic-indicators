@@ -126,11 +126,68 @@ export default class Graph extends Component {
           }
         }
       });
+
+      const chartRef2 = this.canvasRef2.current.getContext('2d');
+
+      if (typeof lineGraph2 !== 'undefined') lineGraph2.destroy();
+      lineGraph2 = new Chart(chartRef2, {
+        type: 'line',
+        data: {
+          // Bring in data
+          labels: this.state.graph2.xAxis,
+          datasets: [
+            {
+              label: countryView2.indicator2,
+              data: this.state.graph2.yAxis,
+              borderColor: '#6610f2'
+            },
+          ]
+        },
+        options: {
+          // Customize options here
+          title: {
+            display: true,
+            text: countryView2.name2
+          },
+          responsive: true,
+          maintainAspectRatio: false,
+          layout: {
+            padding: {
+              top: 5,
+              left: 15,
+              right: 15,
+              bottom: 15
+            },
+          },
+          scales: {
+            xAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Year'
+              }
+            }],
+            yAxes: [{
+              scaleLabel: {
+                display: true,
+                labelString: 'Value'
+              },
+              ticks: {
+                callback: function (value, index, values) {
+                  if (value < 1000000) return value;
+                  if (value >= 1000000000000) return value / 1e12 + 'T';
+                  if (value >= 1000000000) return value / 1e9 + 'B';
+                  if (value >= 1000000) return value / 1e6 + 'M';
+                }
+              }
+            }]
+          }
+        }
+      });
     })
   }
 
   render() {
-    const { data: { totalGDP }, handleCountrySelect, countryView, } = this.props
+    const { data: { totalGDP }, handleCountrySelect, handleCountrySelect2, countryView, } = this.props
     const indicators = ['Total GDP ($)', 'Total Population', 'Interest Rate (%)', 'Unemployment Rate (%)', 'Inflation Rate (%)', 'GDP Growth Rate (%)'];
     return (
       <>
