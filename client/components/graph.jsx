@@ -58,6 +58,7 @@ export default class Graph extends Component {
     // Needs Year selection?
     // Work out logic for handling multiple graphs
 
+    // Second graph is in, need to figure out a way to handle data independently.
     for (let i = 2000; i <= 2020; i++) {
       xAxis.push(i.toString())
     }
