@@ -69,7 +69,7 @@ export default class Graph extends Component {
         yAxis.push(findCountry[indicators[countryView.indicator]][key]);
       }
     }
-    this.setState({ xAxis, yAxis }, () => {
+    this.setState(prevState => ({ graph1: { ...prevState.graph1, xAxis, yAxis }, graph2: { ...prevState.graph2, xAxis, yAxis } }), () => {
       const chartRef = this.canvasRef.current.getContext('2d');
 
       if (typeof lineGraph !== 'undefined') lineGraph.destroy();
