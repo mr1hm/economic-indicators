@@ -24,8 +24,13 @@ export default class App extends Component {
         name: 'Arab World',
         indicator: 'Total GDP ($)'
       },
+      countryView2: {
+        name2: 'Arab World',
+        indicator2: 'Total GDP ($)'
+      },
     }
     this.handleCountrySelect = this.handleCountrySelect.bind(this)
+    this.handleCountrySelect2 = this.handleCountrySelect2.bind(this)
   }
 
   componentDidMount() {
