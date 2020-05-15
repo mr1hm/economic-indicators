@@ -36,7 +36,7 @@ export default class Graph extends Component {
   }
 
   createLineChart() {
-    const { data, countryView } = this.props;
+    const { data, countryView, countryView2 } = this.props;
     const selectData = {
       'Total GDP ($)': 'totalGDP',
       'Total Population': 'totalPopulation',
@@ -55,7 +55,7 @@ export default class Graph extends Component {
     }
     let xAxis = [], yAxis = [], totalGDP = [], countryAndValue = [];
 
-    // Needs Year selection
+    // Needs Year selection?
     // Work out logic for handling multiple graphs
 
     for (let i = 2000; i <= 2020; i++) {
